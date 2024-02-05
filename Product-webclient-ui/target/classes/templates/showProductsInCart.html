@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>All Carts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+<body>
+<div class="container my-2">
+    <div class="card">
+        <div class="card-body">
+            <div th:switch="${cart.products}" class="container my-5">
+                <div class="col-md-10">
+                    
+                    <div th:case="*">
+                            <table class="table table-striped table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+										<th>Price</th>
+										<th>Remove</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="product : ${cart.products}">
+                                        <td th:text="${product.productId}"></td>
+                                        <td th:text="${product.name}">
+										<td th:text="${product.price}">
+            						<td>
+                                        	<a th:href="@{/{cartId}/remove/{productId} (cartId=${cart.cartId}, productId=${product.productId})}"
+                                               class="btn btn-primary">
+                                                Delete
+                                            </a>
+                                            </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <a th:href="@{/{cartId}/clear (cartId=${cart.cartId})}"
+                                               class="btn btn-primary">
+                                                Clear
+                                            </a>
+    </div>
+</div>
+
+
+
+</body>
+</html>
